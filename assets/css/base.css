@@ -4,20 +4,60 @@ body {
     background-position: top;
     background-repeat: no-repeat;
     min-height: 100vh;
+    font-family: 'Lato', sans-serif;
 }
 
 header {
     background-color: #c89f68;
     color: #252e38;
-    width: 100vw;
+    width: Calc(100vw - 40px);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Cinzel', serif;
 }
 
 main {
     background-color: #c89f68;
     color: #252e38;
-    width: 960px;
+    width: 920px;
     max-width: 90vw;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 70px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Cinzel', serif;
+}
+
+p {
+    margin: 10px 0px;
+}
+
+button {
+    margin: 0px auto;
+    display: block;
+    background: none;
+    border: 2px #252e38 solid;
+    border-radius: 0px;
+    padding: 5px 20px;
+    font-size: 20px;
+}
+
+button:hover {
+    background-color: rgb(37,46,56,0.3);
+}
+
+button:focus {
+    outline: none;
 }
