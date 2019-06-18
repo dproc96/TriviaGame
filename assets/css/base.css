@@ -5,3 +5,19 @@ body {
     background-repeat: no-repeat;
     min-height: 100vh;
 }
+
+header {
+    background-color: #c89f68;
+    color: #252e38;
+    width: 100vw;
+}
+
+main {
+    background-color: #c89f68;
+    color: #252e38;
+    width: 960px;
+    max-width: 90vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
