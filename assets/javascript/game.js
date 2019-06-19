@@ -8,7 +8,7 @@ $(document).ready(function() {
         questionIndex: 0,
         generateQuestions() {
             $.ajax({
-                url: `https://opentdb.com/api.php?amount=10&category=20&type=multiple`,
+                url: `https://opentdb.com/api.php?amount=20&category=20&type=multiple`,
                 method: "GET"
             }).then(function(response) {
                 gameObject.questions = response.results.sort(function() { return 0.5 - Math.random() });

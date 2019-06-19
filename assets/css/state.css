@@ -1,0 +1,7 @@
+button:hover {
+    background-color: rgb(37,46,56,0.3);
+}
+
+button:focus {
+    outline: none;
+}
