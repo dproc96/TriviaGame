@@ -12,7 +12,6 @@ $(document).ready(function() {
                 method: "GET"
             }).then(function(response) {
                 gameObject.questions = response.results.sort(function() { return 0.5 - Math.random() });
-                console.log(gameObject)
             })
         },
         runTimer(startingTime, afterFunction) {
@@ -32,7 +31,7 @@ $(document).ready(function() {
         },
         writeQuestion() {
             let activeQuestion = this.questions[this.questionIndex];
-            $("#main-text").html(activeQuestion.question);
+            $("#main-text").html(this.questionIndex+1+". "+activeQuestion.question);
             let correctAnswerIndex = Math.floor(Math.random() * 4);
             let incorrectAnswers = activeQuestion.incorrect_answers.sort(function() { return .5 - Math.random()})
             let incorrectAnswerIndex = 0;
@@ -47,14 +46,16 @@ $(document).ready(function() {
                 }
             }
             this.questionIndex++;
-            if (this.questionIndex === 10) {
-                this.generateQuestions()
-                this.questionIndex = 0;
-            }
             this.runTimer(10, function() { gameObject.evaluateAnswer("false", activeQuestion) })
             $(".button-answer").click(function() {
                 clearInterval(intervalId);
-                gameObject.evaluateAnswer($(this).attr("value"), activeQuestion);
+                if (gameObject.questionIndex === 20) {
+                    gameObject.endGame()
+                    gameObject.questionIndex = 0;
+                }
+                else {
+                    gameObject.evaluateAnswer($(this).attr("value"), activeQuestion);
+                }
             })
         },
         evaluateAnswer(answerValue, questionObject) {
@@ -62,17 +63,24 @@ $(document).ready(function() {
             if (answerValue === "true") {
                 $("#main-text").html("You are correct!")
                 this.correctAnswersCount++
-                $("#correct-count").html(this.correctAnswersCount);
             }
             else {
                 $("#main-text").html(`Sorry! The correct answer was "${questionObject.correct_answer}"`)
                 this.incorrectAnswersCount++
-                $("#incorrect-count").html(this.incorrectAnswersCount);
             }
             this.runTimer(5, function () { gameObject.writeQuestion() })
             $("#next").click(function() {
                 clearInterval(intervalId);
                 gameObject.writeQuestion();
+            })
+        },
+        endGame() {
+            $("#main-header").html("Finished!")
+            $("#main-text").html(`You got ${this.correctAnswersCount} correct and ${this.incorrectAnswersCount} incorrect!`)
+            $("#main-buttons").html("<button id='play-again'>Play Again?</button>")
+            $("#play-again").click(function() {
+                gameObject.generateQuestions();
+                gameObject.runTimer(5, function() { gameObject.writeQuestion() })
             })
         }
     };
